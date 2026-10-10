@@ -46,8 +46,7 @@
   # ── Mullvad VPN (client) ───────────────────────────────────────────
   services.mullvad-vpn = {
     enable = true;
-    # package is automatically managed; use gui.enable for GUI
-    gui.enable = false;
+    # GUI is enabled by default; package auto-configured
   };
 
   # ── Fail2ban ─────────────────────────────────────────────────────────

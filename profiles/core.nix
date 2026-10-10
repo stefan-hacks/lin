@@ -186,11 +186,7 @@
   services.timesyncd.enable = true;
 
   # ── Logging ────────────────────────────────────────────────────────
-  services.journald.settings.Journal = {
-    SystemMaxUse = "500M";
-    SystemMaxFileSize = "50M";
-    MaxRetentionSec = "1month";
-  };
+  services.journald.extraConfig = "SystemMaxUse=500M\nSystemMaxFileSize=50M\nMaxRetentionSec=1month";
 
   # ── Log rotation ─────────────────────────────────────────────────────
   services.logrotate.enable = true;
