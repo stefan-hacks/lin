@@ -41,18 +41,16 @@
   };
 
   # ── Etc files ────────────────────────────────────────────────────────
-  environment.etc = {
-    "issue".text = ''''
-      \4{1} (\n) on \l
-    ''';
-  };
+  # environment.etc = {
+  #   "issue".text = "lin (\\n) on \\l";
+  # };
 
   # ── Systemd defaults ─────────────────────────────────────────────────
-  systemd.extraConfig = ''''
-    [Manager]
-    DefaultTimeoutStartSec=30s
-    DefaultTimeoutStopSec=30s
-  ''';
+  # systemd.extraConfig = ''
+  #   [Manager]
+  #   DefaultTimeoutStartSec=30s
+  #   DefaultTimeoutStopSec=30s
+  # '';
 
   # ── Udisks (auto-mount removable media) ──────────────────────────────
   services.udisks2.enable = true;

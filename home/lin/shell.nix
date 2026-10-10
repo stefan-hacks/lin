@@ -80,7 +80,7 @@
       shutdown = "sudo shutdown -h now";
       update = "sudo nixos-rebuild switch --flake ~/lin";
       upgrade = "sudo nixos-rebuild switch --upgrade --flake ~/lin";
-      gc = "sudo nix-collect-garbage -d";
+      nix-gc = "sudo nix-collect-garbage -d";
       optimise = "sudo nix-store --optimise";
 
       # Nix
@@ -145,39 +145,6 @@
     };
 
     # ── Bash init extra ──────────────────────────────────────────────
-    initExtra = ''''
-      # Enable direnv
-      eval "$(direnv hook bash)"
-
-      # Enable zoxide
-      eval "$(zoxide init bash)"
-
-      # Enable starship
-      eval "$(starship init bash)"
-
-      # Enable fzf
-      eval "$(fzf --bash)"
-
-      # Enable nix-direnv
-      eval "$(direnv stdlib)"
-
-      # Safety: prevent rm -rf /
-      alias rm="rm -Iv"
-
-      # Make less more friendly
-      export LESS="-R --mouse"
-
-      # Colored man pages
-      export LESS_TERMCAP_mb=$'\\e[1;32m'
-      export LESS_TERMCAP_md=$'\\e[1;32m'
-      export LESS_TERMCAP_me=$'\\e[0m'
-      export LESS_TERMCAP_se=$'\\e[0m'
-      export LESS_TERMCAP_so=$'\\e[01;33m'
-      export LESS_TERMCAP_ue=$'\\e[0m'
-      export LESS_TERMCAP_us=$'\\e[1;4;31m'
-
-      # Devel paths
-      export PATH="$HOME/.cargo/bin:$HOME/go/bin:$HOME/.local/bin:$PATH"
-    ''';
+    # initExtra managed via simpler session variables
   };
 }

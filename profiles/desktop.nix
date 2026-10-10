@@ -25,9 +25,9 @@
   services.desktopManager.gnome = {
     enable = true;
     # Enable core apps
-    extraGSettingsPackages = with pkgs; [
-      gnome.gnome-settings-daemon
-      gnome.gnome-control-center
+    extraGSettingsOverridePackages = with pkgs; [
+      gnome-settings-daemon
+      gnome-control-center
     ];
   };
 
@@ -37,25 +37,9 @@
   services.gnome.tracker.enable = false;
 
   # ── DConf defaults (GNOME settings from audit) ─────────────────────
+  # GSettings overrides are managed via Home Manager dconf (see home/lin/desktop.nix)
   programs.dconf.enable = true;
-  services.xserver.desktopManager.gnome.extraGSettingsOverrides = '''
-    [org.gnome.desktop.interface]
-    color-scheme='prefer-dark'
-    clock-format='12h'
-    clock-show-weekday=true
-    clock-show-date=true
-    font-name='Cantill 11'
-    document-font-name='Cantill 11'
-    cursor-theme='Adwaita'
-    cursor-size=24
-    gtk-theme='Adwaita'
-    icon-theme='Adwaita'
-    enable-animations=true
-    enable-hot-corners=true
-
-    [org.gnome.desktop.wm.preferences]
-    button-layout='appmenu:minimize,maximize,close'
-  ''';
+  # services.xserver.desktopManager.gnome.extraGSettingsOverrides = "";
 
   # ── XDG portal ─────────────────────────────────────────────────────
   xdg.portal = {
@@ -75,7 +59,7 @@
       liberation_ttf
       noto-fonts
       noto-fonts-cjk-sans
-      noto-fonts-emoji
+      noto-fonts-color-emoji
       source-code-pro
       font-awesome
     ];
@@ -97,24 +81,24 @@
     firefox
 
     # GNOME ecosystem
-    gnome.gnome-tweaks
-    gnome.gnome-connections
-    gnome.gnome-calculator
-    gnome.gnome-calendar
-    gnome.gnome-characters
-    gnome.gnome-clocks
-    gnome.gnome-contacts
-    gnome.gnome-logs
-    gnome.gnome-maps
-    gnome.gnome-screenshot
-    gnome.gnome-system-monitor
-    gnome.gnome-text-editor
-    gnome.gnome-weather
-    gnome.nautilus
-    gnome.eog          # Image viewer
-    gnome.evince       # PDF viewer
-    gnome.file-roller  # Archive manager
-    gnome.totem        # Video player
+    gnome-tweaks
+    gnome-connections
+    gnome-calculator
+    gnome-calendar
+    gnome-characters
+    gnome-clocks
+    gnome-contacts
+    gnome-logs
+    gnome-maps
+    gnome-screenshot
+    gnome-system-monitor
+    gnome-text-editor
+    gnome-weather
+    nautilus
+    eog          # Image viewer
+    evince       # PDF viewer
+    file-roller  # Archive manager
+    totem        # Video player
 
     # Media
     vlc
@@ -142,7 +126,7 @@
 
   # ── Flatpak support ──────────────────────────────────────────────────
   services.flatpak.enable = true;
-  xdg.portal.extraPortals = lib.mkAfter [ pkgs.xdg-desktop-portal-gnome ];
+  # xdg-desktop-portal-gnome already listed above
 
   # ── Wayland-specific ─────────────────────────────────────────────────
   environment.sessionVariables = {

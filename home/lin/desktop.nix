@@ -5,7 +5,8 @@
 
 {
   # ── GNOME dconf settings (from Debian audit) ─────────────────────
-  # These are applied declaratively via Home Manager
+  # NOTE: Font and theme settings are managed by programs.gtk below.
+  # Only set GNOME-specific / non-GTK dconf settings here.
   dconf.settings = {
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
@@ -13,13 +14,8 @@
       clock-show-weekday = true;
       clock-show-date = true;
       clock-show-seconds = false;
-      font-name = "Cantarell 11";
-      document-font-name = "Cantarell 11";
-      monospace-font-name = "Source Code Pro 10";
-      cursor-theme = "Adwaita";
+      cursor-theme = lib.mkForce "Adwaita";
       cursor-size = 24;
-      gtk-theme = "Adwaita";
-      icon-theme = "Adwaita";
       enable-animations = true;
       enable-hot-corners = true;
       font-antialiasing = "grayscale";
@@ -87,7 +83,7 @@
     enable = true;
     theme = {
       name = "Adwaita-dark";
-      package = pkgs.gnome.gnome-themes-extra;
+      package = pkgs.gnome-themes-extra;
     };
     iconTheme = {
       name = "Adwaita";

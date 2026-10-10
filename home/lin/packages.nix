@@ -9,8 +9,6 @@
     tldr
     tealdeer
     bat
-    exa
-    eza
     fd
     ripgrep
     fzf
@@ -30,7 +28,7 @@
 
     # Development
     vscode
-    jetbrains.idea-community  # Or pycharm, etc.
+    jetbrains.idea  # Replaces idea-community
     insomnia  # API client
     postman   # Alternative
 
@@ -40,7 +38,7 @@
     gimp
     inkscape
     blender
-    kdenlive
+    # kdenlive  # Use kdePackages.kdenlive if needed
 
     # Communication
     discord

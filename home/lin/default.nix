@@ -36,12 +36,7 @@
   # ── File creation ──────────────────────────────────────────────────
   home.file = {
     # Git config (already in system programs.git, but can override here)
-    ".config/git/ignore".text = ''''
-      *.swp
-      *~
-      .DS_Store
-      Thumbs.db
-    ''';
+    ".config/git/ignore".text = "*.swp\n*~\n.DS_Store\nThumbs.db";
   };
 
   # ── Allow unfree packages for user ─────────────────────────────────

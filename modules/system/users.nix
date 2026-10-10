@@ -13,7 +13,7 @@
     ollama = { gid = 989; };
     libvirt = { gid = 121; };
     nix-users = { gid = 985; };
-    render = { gid = 992; };
+    # render group managed by NixOS (default gid 303)
   };
 
   # ── User shell defaults ──────────────────────────────────────────────

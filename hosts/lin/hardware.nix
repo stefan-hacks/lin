@@ -13,13 +13,13 @@
     enable32Bit = true;
     extraPackages = with pkgs; [
       mesa
-      amdvlk
-      vaapiVdpau
+      # amdvlk removed — RADV is default
+      libva-vdpau-driver
       libvdpau-va-gl
       rocmPackages.clr.icd      # OpenCL
     ];
     extraPackages32 = with pkgs; [
-      driversi686Linux.amdvlk
+      # driversi686Linux.amdvlk removed
     ];
   };
 
@@ -56,6 +56,9 @@
   hardware.pulseaudio.enable = false;
 
   # ── Power management ─────────────────────────────────────────────────
+  # TLP is used instead of power-profiles-daemon (GNOME enables this by default)
+  services.power-profiles-daemon.enable = false;
+
   powerManagement = {
     enable = true;
     cpuFreqGovernor = "schedutil";

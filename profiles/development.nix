@@ -126,7 +126,6 @@
   # ── Build cache ──────────────────────────────────────────────────────
   programs.ccache = {
     enable = true;
-    package = pkgs.ccache;
     cacheDir = "/var/cache/ccache";
   };
 

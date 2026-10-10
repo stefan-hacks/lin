@@ -28,7 +28,6 @@
   # ── Eza (modern ls) ──────────────────────────────────────────────
   programs.eza = {
     enable = true;
-    enableAliases = true;
     icons = true;
     git = true;
   };
@@ -108,21 +107,7 @@
     defaultEditor = true;
     viAlias = true;
     vimAlias = true;
-    extraLuaConfig = ''''
-      -- Minimal init.lua for lin
-      vim.opt.number = true
-      vim.opt.relativenumber = true
-      vim.opt.expandtab = true
-      vim.opt.shiftwidth = 2
-      vim.opt.tabstop = 2
-      vim.opt.smartindent = true
-      vim.opt.termguicolors = true
-      vim.opt.mouse = 'a'
-      vim.opt.clipboard = 'unnamedplus'
-      vim.opt.undofile = true
-      vim.opt.ignorecase = true
-      vim.opt.smartcase = true
-    ''';
+    extraLuaConfig = "vim.opt.number = true\nvim.opt.relativenumber = true\nvim.opt.expandtab = true\nvim.opt.shiftwidth = 2\nvim.opt.tabstop = 2\nvim.opt.smartindent = true\nvim.opt.termguicolors = true\nvim.opt.mouse = 'a'\nvim.opt.clipboard = 'unnamedplus'\nvim.opt.undofile = true\nvim.opt.ignorecase = true\nvim.opt.smartcase = true";
     plugins = with pkgs.vimPlugins; [
       nvim-treesitter
       nvim-lspconfig
@@ -151,7 +136,7 @@
       pull.rebase = true;
       core.editor = "nvim";
       core.pager = "delta";
-      interactive.diffFilter = "delta --color-only";
+      # interactive.diffFilter managed by programs.delta.enable
       delta = {
         navigate = true;
         light = false;
@@ -259,22 +244,6 @@
       continuum
       dracula
     ];
-    extraConfig = ''''
-      # Easy config reload
-      bind r source-file ~/.config/tmux/tmux.conf \\; display-message "Config reloaded!"
-
-      # Pane splitting
-      bind | split-window -h
-      bind - split-window -v
-
-      # Pane navigation (vim-style)
-      bind h select-pane -L
-      bind j select-pane -D
-      bind k select-pane -U
-      bind l select-pane -R
-
-      # Enable 24-bit color
-      set -ga terminal-overrides ",xterm-256color:Tc"
-    ''';
+    extraConfig = "bind r source-file ~/.config/tmux/tmux.conf \\; display-message \\\"Config reloaded!\\\"\\nbind | split-window -h\\nbind - split-window -v\\nbind h select-pane -L\\nbind j select-pane -D\\nbind k select-pane -U\\nbind l select-pane -R\\nset -ga terminal-overrides \\\",xterm-256color:Tc\\\"";
   };
 }

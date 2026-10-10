@@ -98,28 +98,20 @@
   };
 
   # ── Sudo hardening ───────────────────────────────────────────────────
-  security.sudo.extraConfig = '''
-    # Log all sudo commands
-    Defaults log_input,log_output
-    Defaults logfile="/var/log/sudo-io"
-    # Timeout for sudo sessions
-    Defaults timestamp_timeout=5
-    # Require tty
-    Defaults requiretty
-  ''';
+  security.sudo.extraConfig = "Defaults log_input,log_output\nDefaults logfile=\"/var/log/sudo-io\"\nDefaults timestamp_timeout=5\nDefaults requiretty";
 
   # ── SSH hardening (overrides core.nix) ───────────────────────────────
   services.openssh.settings = {
-    PermitRootLogin = "no";
+    PermitRootLogin = lib.mkForce "no";
     PasswordAuthentication = false;
     PubkeyAuthentication = true;
-    X11Forwarding = false;
+    X11Forwarding = lib.mkForce false;
     AllowTcpForwarding = "local";
     MaxAuthTries = 3;
     LoginGraceTime = 30;
     ClientAliveInterval = 300;
     ClientAliveCountMax = 2;
-    Banner = "none";
+    Banner = null;
   };
 
   # ── Firewall (nftables-based) ─────────────────────────────────────
@@ -164,37 +156,15 @@
   };
 
   # ── AIDE file integrity ──────────────────────────────────────────────
-  services.aide = {
-    enable = true;
-    dbPath = "/var/lib/aide/aide.db";
-    configFile = pkgs.writeText "aide.conf" '''
-      database=file:/var/lib/aide/aide.db
-      database_out=file:/var/lib/aide/aide.db.new
-      gzip_dbout=yes
-      verbose=5
-
-      /boot           p+u+g+sha256
-      /bin            p+u+g+sha256
-      /sbin           p+u+g+sha256
-      /lib            p+u+g+sha256
-      /lib64          p+u+g+sha256
-      /usr            p+u+g+sha256
-      /etc            p+u+g+sha256
-      !/etc/resolv.conf
-      !/etc/mtab
-      !/etc/prelink.cache
-      !/etc/resolv.conf
-      !/etc/hdparam
-      !/etc/udev/devices
-      !/etc/dracut.conf.d
-    ''';
-  };
+  # NOTE: services.aide is not available in nixpkgs.
+  # Install aide package and configure manually, or use a custom module.
+  # packages.aide is available in environment.systemPackages above.
 
   # ── Hardening packages ───────────────────────────────────────────────
   environment.systemPackages = with pkgs; [
     lynis
-    chkrootkit
-    rkhunter
+    # chkrootkit removed (unmaintained upstream)
+    # rkhunter removed (unmaintained upstream)
     aide
     clamav
     clamtk

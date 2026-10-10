@@ -75,7 +75,7 @@
     netcat-openbsd
     bind.dnsutils
     openssl
-    ca-certificates
+    cacert  # CA certificates bundle
 
     # Monitoring
     htop
@@ -132,7 +132,7 @@
   # ── Programs ────────────────────────────────────────────────────────
   programs.bash = {
     enableCompletion = true;
-    promptInit = '''';
+    # promptInit = "";
   };
 
   programs.gnupg.agent = {
@@ -169,7 +169,7 @@
     settings = {
       PermitRootLogin = "prohibit-password";
       PasswordAuthentication = false;
-      KbdInteractiveAuthentication = no;
+      KbdInteractiveAuthentication = false;
       X11Forwarding = true;
     };
   };
@@ -186,11 +186,11 @@
   services.timesyncd.enable = true;
 
   # ── Logging ────────────────────────────────────────────────────────
-  services.journald.extraConfig = '''
-    SystemMaxUse=500M
-    SystemMaxFileSize=50M
-    MaxRetentionSec=1month
-  ''';
+  services.journald.settings.Journal = {
+    SystemMaxUse = "500M";
+    SystemMaxFileSize = "50M";
+    MaxRetentionSec = "1month";
+  };
 
   # ── Log rotation ─────────────────────────────────────────────────────
   services.logrotate.enable = true;

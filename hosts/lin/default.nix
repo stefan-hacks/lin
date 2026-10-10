@@ -130,6 +130,9 @@
   # ── Mutable user password (set on first boot via passwd) ─────────────
   users.mutableUsers = true;
 
+  # ── Allow unfree packages (VSCode extensions, etc.) ──────────────────
+  nixpkgs.config.allowUnfree = true;
+
   # ── State version (matches NixOS release for this config) ────────────
   system.stateVersion = "24.11";
 }

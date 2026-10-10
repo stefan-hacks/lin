@@ -17,10 +17,8 @@
   services.httpd = {
     enable = true;
     adminAddr = "webmaster@localhost";
-    extraConfig = ''''
-      # Debian default: /var/www/html
-      DocumentRoot /var/www/html
-    ''';
+    # DocumentRoot is set in the default virtual host config
+    # extraConfig = "";
   };
 
   # Ensure /var/www/html exists
@@ -35,8 +33,8 @@
     # Listen on all interfaces (for local network access)
     host = "0.0.0.0";
     port = 11434;
-    # Acceleration: AMD ROCm
-    acceleration = "rocm";
+    # AMD ROCm package
+    package = pkgs.ollama-rocm;
   };
 
   # ── Homepage dashboard ───────────────────────────────────────────────
@@ -48,7 +46,8 @@
   # ── Mullvad VPN (client) ───────────────────────────────────────────
   services.mullvad-vpn = {
     enable = true;
-    package = pkgs.mullvad-vpn;
+    # package is automatically managed; use gui.enable for GUI
+    gui.enable = false;
   };
 
   # ── Fail2ban ─────────────────────────────────────────────────────────
@@ -96,7 +95,6 @@
     enable = true;
     package = pkgs.plocate;
     interval = "weekly";
-    localuser = null;  # Run as root for full filesystem scan
   };
 
   # ── System statistics ──────────────────────────────────────────────
@@ -160,7 +158,7 @@
     fail2ban
     smartmontools
     lynis
-    chkrootkit
+    # chkrootkit removed (unmaintained upstream)
     aide
   ];
 }
