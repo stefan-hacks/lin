@@ -1,0 +1,39 @@
+# .gitignore
+# Ignore files that shouldn't be in the NixOS repo
+
+# Nix build artifacts
+result
+result-*
+*.drv
+
+# Direnv
+.envrc
+.direnv/
+
+# Secrets (unencrypted)
+secrets/*.yaml
+secrets/*.json
+secrets/*.txt
+secrets/*.key
+secrets/*.pem
+!secrets/*.enc
+!secrets/.gitkeep
+
+# Age keys
+*.age
+keys.txt
+
+# Editor
+*.swp
+*~
+.DS_Store
+.idea/
+.vscode/
+
+# Build
+build/
+dist/
+
+# Local dev
+.local/
+.cache/
