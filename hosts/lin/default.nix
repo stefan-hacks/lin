@@ -16,11 +16,8 @@
   networking.hostId = "cafebabe";  # Required for ZFS (placeholder)
 
   # ── Bootloader ───────────────────────────────────────────────────────
-  # Current Debian uses GRUB2 — keep GRUB2 for familiarity
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "nodev";
-  boot.loader.grub.efiSupport = true;
-  boot.loader.grub.useOSProber = true;
+  # systemd-boot (UEFI only)
+  boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
 

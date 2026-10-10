@@ -6,15 +6,12 @@
 
 {
   # ── Boot ───────────────────────────────────────────────────────────
-  # GRUB2 is the only bootloader (user preference)
-  boot.loader.grub.configurationLimit = 10;
-  boot.loader.grub.extraEntries = ''
-    menuentry "Debian (fallback)" --class debian {
-      search --set=root --fs-uuid e21be7f5-0d70-478f-b3a8-c374ca34bedc
-      linux /vmlinuz root=/dev/mapper/lin--vg-root ro quiet
-      initrd /initrd.img
-    }
-  '';
+  # systemd-boot (EFI only — required for this machine)
+  boot.loader.systemd-boot = {
+    enable = true;
+    configurationLimit = 10;
+  };
+  boot.loader.efi.canTouchEfiVariables = true;
 
   # ── Nix ──────────────────────────────────────────────────────────────
   nix = {
